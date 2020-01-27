@@ -15,8 +15,12 @@ import java.util.UUID;
 public class RoomService {
     private static Map<UUID, Room> storage = new HashMap<>();
 
-    @Inject
     private PlayerService playerService;
+
+    @Inject
+    public RoomService(PlayerService playerService) {
+        this.playerService = playerService;
+    }
 
     public Room createRoom(@NotNull Player owner, String roomName, String roomDesc, String password) {
         Room room = new Room(owner, roomName, roomDesc, password);

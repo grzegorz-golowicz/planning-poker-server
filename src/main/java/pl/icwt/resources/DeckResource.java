@@ -1,6 +1,7 @@
 package pl.icwt.resources;
 
-import pl.icwt.model.Card;
+import pl.icwt.dtos.CardDTO;
+import pl.icwt.resources.builders.DeckBuilder;
 import pl.icwt.services.DeckService;
 
 import javax.inject.Inject;
@@ -11,15 +12,21 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/deck")
+@Produces(MediaType.APPLICATION_JSON)
 public class DeckResource {
 
+    private final DeckService deckService;
+    private final DeckBuilder deckBuilder;
+
     @Inject
-    private DeckService deckService;
+    public DeckResource(DeckService deckService, DeckBuilder deckBuilder) {
+        this.deckService = deckService;
+        this.deckBuilder = deckBuilder;
+    }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Card> getDeck() {
+    public List<CardDTO> getDeck() {
 
-        return deckService.getDeck();
+        return deckBuilder.toDTOList(deckService.getDeck());
     }
 }

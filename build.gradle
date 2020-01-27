@@ -16,6 +16,9 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
+
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 
